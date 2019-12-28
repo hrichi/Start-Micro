@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+option csharp_namespace = "Start_Micro_Grpc_Services";
+
+package weather;
+
+service Weather {
+  rpc GetForecast (ForecastRequest) returns (ForecastResponse);
+  rpc GetForecasts (Empty) returns (ForecastsResponse);
+}
+
+message ForecastResponse {
+  string cityName = 1;
+  int32 temp = 2;
+}
+
+message ForecastsResponse {
+  repeated ForecastResponse Forecasts = 1;
+}
+
+message ForecastRequest {
+    string cityName = 1;
+}
+
+message Empty {
+}

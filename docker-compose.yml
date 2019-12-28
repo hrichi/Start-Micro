@@ -1,0 +1,25 @@
+version: '3'
+services: 
+    grpc_services:
+        build:
+            context: ./
+            dockerfile: ./src/Start-Micro-Grpc-Services/Dockerfile
+        image: start_micro/grpc_services
+        ports:
+            - "9090:80"
+    angular_client:
+        build:
+            context: ./
+            dockerfile: ./src/Start-Micro-Web/Dockerfile
+        image: start_micro/angular_client
+        ports:
+            - "8081:80"
+    envoy:
+        build:
+          context: ./
+          dockerfile: ./src/grpc-gateway/envoy/Dockerfile
+        image: start_micro/envoy
+        ports:
+          - "8080:8080"
+        links:
+          - grpc_services

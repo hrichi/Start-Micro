@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <AssemblyName>Start_Micro_Grpc_Services</AssemblyName>
+    <RootNamespace>Start_Micro_Grpc_Services</RootNamespace>
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <PackageReference Include="Grpc.AspNetCore" Version="2.24.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Protos\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Protobuf Include="..\Protos\weather.proto"  GrpcServices="Server">
+      <Link>Protos\weather.proto</Link>
+    </Protobuf>
+  </ItemGroup>
+
+</Project>

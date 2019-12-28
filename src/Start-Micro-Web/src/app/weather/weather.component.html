@@ -1,0 +1,6 @@
+<h2>Forecasts</h2>
+<ul>
+    <li *ngFor="let item of forecats">
+        {{item.getCityname() +","+ item.getTemp()}}
+    </li>
+</ul>
