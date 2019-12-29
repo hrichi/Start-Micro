@@ -1,1 +1,11 @@
-<app-weather></app-weather>
+<mat-toolbar color="primary">
+    <mat-toolbar-row>
+      <h1>Start Micro</h1>
+      <span class="menu-spacer"></span>
+      <div>
+        <a mat-button [routerLink]="'/weather'"> Weather </a>
+        <a mat-button [routerLink]="'/create-account'"> Create Account </a>
+      </div>
+    </mat-toolbar-row>
+  </mat-toolbar>
+  <router-outlet></router-outlet>

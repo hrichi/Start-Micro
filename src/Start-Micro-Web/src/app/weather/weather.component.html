@@ -1,6 +1,11 @@
-<h2>Forecasts</h2>
-<ul>
-    <li *ngFor="let item of forecats">
-        {{item.getCityname() +","+ item.getTemp()}}
-    </li>
-</ul>
+<mat-toolbar color="primary">
+    <span>Weather Forecast</span>
+</mat-toolbar>
+<mat-card *ngFor="let item of forecats">
+    <mat-card-title>
+        {{item.getCityname()}}
+    </mat-card-title>
+    <mat-card-content>
+        {{item.getTemp()}}
+    </mat-card-content>
+</mat-card>
