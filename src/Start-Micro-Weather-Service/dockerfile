@@ -1,0 +1,10 @@
+# Build
+FROM node:12.7-alpine AS build
+WORKDIR /usr/src/app
+COPY ./src/Start-Micro-Weather-Service/package*.json ./
+RUN npm install
+COPY ./src/Start-Micro-Weather-Service/ ./
+
+# Run
+EXPOSE 3000
+CMD ["node", "index.js"]

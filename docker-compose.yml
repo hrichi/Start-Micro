@@ -3,21 +3,28 @@ services:
     grpc_services:
         build:
             context: ./
-            dockerfile: ./src/Start-Micro-Grpc-Services/Dockerfile
+            dockerfile: ./src/Start-Micro-Grpc-Services/dockerfile
         image: start_micro/grpc_services
         ports:
             - "9090:80"
+    weather_service:
+        build:
+            context: ./
+            dockerfile: ./src/Start-Micro-Weather-Service/dockerfile
+        image: start_micro/weather_service
+        ports:
+            - "8082:3000"
     angular_client:
         build:
             context: ./
-            dockerfile: ./src/Start-Micro-Web/Dockerfile
+            dockerfile: ./src/Start-Micro-Web/dockerfile
         image: start_micro/angular_client
         ports:
             - "8081:80"
     envoy:
         build:
           context: ./
-          dockerfile: ./src/grpc-gateway/envoy/Dockerfile
+          dockerfile: ./src/grpc-gateway/envoy/dockerfile
         image: start_micro/envoy
         ports:
           - "8080:8080"

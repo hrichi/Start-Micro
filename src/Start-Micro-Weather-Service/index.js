@@ -24,14 +24,19 @@ app.get('/:cityName', function (req, res) {
         if (err) {
             res.send(err)
         } else {
-            let weather = JSON.parse(body)
-            let weatherResponse = {
-                city: weather.name,
-                temp: weather.main.temp,
-                desc: weather.weather[0].description,
-                icon: `http://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`
-            };
-            res.json(weatherResponse)
+            try {
+                let weather = JSON.parse(body)
+                let weatherResponse = {
+                    city: weather.name,
+                    temp: weather.main.temp,
+                    desc: weather.weather[0].description,
+                    icon: `http://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`
+                };
+                res.json(weatherResponse)
+            }
+            catch (ex) {
+                res.send(ex)
+            }
         }
     });
 })
