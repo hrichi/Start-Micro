@@ -2,13 +2,12 @@ FROM mcr.microsoft.com/dotnet/core/sdk:3.1 AS build
 WORKDIR /app
 
 # copy csproj and restore as distinct layers
-COPY ./src/Start-Micro-Grpc-Services/*.sln .
-COPY ./src/Start-Micro-Grpc-Services/*.csproj .
+COPY ./*.sln .
+COPY ./*.csproj .
 RUN dotnet restore
 
 # copy everything else and build app
-COPY ./src/Start-Micro-Grpc-Services/ .
-COPY ./src/Protos ../Protos
+COPY . .
 RUN dotnet publish -c Release -o out
 
 

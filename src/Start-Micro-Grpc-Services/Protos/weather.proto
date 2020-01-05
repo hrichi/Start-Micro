@@ -6,16 +6,15 @@ package weather;
 
 service Weather {
   rpc GetForecast (ForecastRequest) returns (ForecastResponse);
-  rpc GetForecasts (Empty) returns (ForecastsResponse);
 }
 
 message ForecastResponse {
-  string cityName = 1;
-  int32 temp = 2;
-}
-
-message ForecastsResponse {
-  repeated ForecastResponse Forecasts = 1;
+  string countryCode = 1;
+  string city = 2;
+  float temp = 3;
+  string desc = 4;
+  string wind = 5;
+  string icon = 6;
 }
 
 message ForecastRequest {

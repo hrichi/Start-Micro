@@ -27,10 +27,12 @@ app.get('/:cityName', function (req, res) {
             try {
                 let weather = JSON.parse(body)
                 let weatherResponse = {
+                    countryCode: weather.sys.country,
                     city: weather.name,
                     temp: weather.main.temp,
                     desc: weather.weather[0].description,
-                    icon: `http://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`
+                    wind: weather.wind.speed * 3.6,
+                    icon: `http://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`,
                 };
                 res.json(weatherResponse)
             }

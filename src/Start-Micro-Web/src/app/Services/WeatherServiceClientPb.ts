@@ -10,10 +10,8 @@
 import * as grpcWeb from 'grpc-web';
 
 import {
-  Empty,
   ForecastRequest,
-  ForecastResponse,
-  ForecastsResponse} from './weather_pb';
+  ForecastResponse} from './weather_pb';
 
 export class WeatherClient {
   client_: grpcWeb.AbstractClientBase;
@@ -53,28 +51,6 @@ export class WeatherClient {
       request,
       metadata || {},
       this.methodInfoGetForecast,
-      callback);
-  }
-
-  methodInfoGetForecasts = new grpcWeb.AbstractClientBase.MethodInfo(
-    ForecastsResponse,
-    (request: Empty) => {
-      return request.serializeBinary();
-    },
-    ForecastsResponse.deserializeBinary
-  );
-
-  getForecasts(
-    request: Empty,
-    metadata: grpcWeb.Metadata | null,
-    callback: (err: grpcWeb.Error,
-               response: ForecastsResponse) => void) {
-    return this.client_.rpcCall(
-      this.hostname_ +
-        '/weather.Weather/GetForecasts',
-      request,
-      metadata || {},
-      this.methodInfoGetForecasts,
       callback);
   }
 

@@ -1,9 +1,9 @@
 # Build
 FROM node:12.7-alpine AS build
 WORKDIR /usr/src/app
-COPY ./src/Start-Micro-Web/package.json ./
+COPY ./package*.json ./
 RUN npm install
-COPY ./src/Start-Micro-Web/ ./
+COPY . .
 RUN npm run build
 
 # Run

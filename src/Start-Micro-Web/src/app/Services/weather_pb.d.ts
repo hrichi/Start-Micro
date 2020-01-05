@@ -1,11 +1,23 @@
 import * as jspb from "google-protobuf"
 
 export class ForecastResponse extends jspb.Message {
-  getCityname(): string;
-  setCityname(value: string): void;
+  getCountrycode(): string;
+  setCountrycode(value: string): void;
+
+  getCity(): string;
+  setCity(value: string): void;
 
   getTemp(): number;
   setTemp(value: number): void;
+
+  getDesc(): string;
+  setDesc(value: string): void;
+
+  getWind(): string;
+  setWind(value: string): void;
+
+  getIcon(): string;
+  setIcon(value: string): void;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): ForecastResponse.AsObject;
@@ -17,28 +29,12 @@ export class ForecastResponse extends jspb.Message {
 
 export namespace ForecastResponse {
   export type AsObject = {
-    cityname: string,
+    countrycode: string,
+    city: string,
     temp: number,
-  }
-}
-
-export class ForecastsResponse extends jspb.Message {
-  getForecastsList(): Array<ForecastResponse>;
-  setForecastsList(value: Array<ForecastResponse>): void;
-  clearForecastsList(): void;
-  addForecasts(value?: ForecastResponse, index?: number): ForecastResponse;
-
-  serializeBinary(): Uint8Array;
-  toObject(includeInstance?: boolean): ForecastsResponse.AsObject;
-  static toObject(includeInstance: boolean, msg: ForecastsResponse): ForecastsResponse.AsObject;
-  static serializeBinaryToWriter(message: ForecastsResponse, writer: jspb.BinaryWriter): void;
-  static deserializeBinary(bytes: Uint8Array): ForecastsResponse;
-  static deserializeBinaryFromReader(message: ForecastsResponse, reader: jspb.BinaryReader): ForecastsResponse;
-}
-
-export namespace ForecastsResponse {
-  export type AsObject = {
-    forecastsList: Array<ForecastResponse.AsObject>,
+    desc: string,
+    wind: string,
+    icon: string,
   }
 }
 

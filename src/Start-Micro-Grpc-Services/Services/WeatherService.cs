@@ -1,37 +1,41 @@
 ﻿using Grpc.Core;
-using System;
+using Microsoft.Extensions.Options;
+using Start_Micro_Grpc_Services.Infrastructure;
+using System.Net.Http;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
+using System;
 
 namespace Start_Micro_Grpc_Services.Services
 {
     public class WeatherService : Weather.WeatherBase
     {
-        private static Random random = new Random();
-        private static string[] Cities = new string[] { "New York", "London", "Paris" };
+        private readonly IHttpClientFactory _httpClientFactory;
+        private readonly AppSettings _settings;
 
-        public override Task<ForecastResponse> GetForecast(ForecastRequest request, ServerCallContext context)
+        public WeatherService(IHttpClientFactory httpClientFactory, IOptions<AppSettings> options)
         {
-            return Task.FromResult(new ForecastResponse
-            {
-                CityName = request.CityName,
-                Temp = random.Next(-30, 50)
-            }); ;
+            _httpClientFactory = httpClientFactory;
+            _settings = options.Value;
         }
 
-        public override Task<ForecastsResponse> GetForecasts(Empty request, ServerCallContext context)
+        public override async Task<ForecastResponse> GetForecast(ForecastRequest request, ServerCallContext context)
         {
-            var response = new ForecastsResponse();
-
-            foreach (var city in Cities)
+            try
             {
-                response.Forecasts.Add(new ForecastResponse
-                {
-                    CityName = city,
-                    Temp = random.Next(-30, 50)
-                });
-            }
+                var client = _httpClientFactory.CreateClient(HttpClients.StartMicroApi);
+                var result = await client.GetStringAsync(API.WeatherService.GetForecast(_settings.WeatherServiceApiUrl, request.CityName));
 
-            return Task.FromResult(response);
+                var forecast = JsonConvert.DeserializeObject<ForecastResponse>(result);
+                return forecast;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                Console.WriteLine(ex.StackTrace);
+                throw ;
+            }
+           
         }
     }
 }

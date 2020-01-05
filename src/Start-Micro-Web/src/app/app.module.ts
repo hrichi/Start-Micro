@@ -13,10 +13,10 @@ import {
   MatIconModule,
   MatListModule,
   MatCardModule,
-  MatButtonModule
+  MatButtonModule,
+  MatInputModule
 } from '@angular/material';
-
-
+import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { Routes, RouterModule } from '@angular/router';
 
@@ -33,7 +33,8 @@ const appRoutes: Routes = [
     RouterModule.forRoot(
       appRoutes,
       {
-        enableTracing: false
+        enableTracing: false,
+        useHash: true
       }
     ),
     BrowserModule,
@@ -46,7 +47,9 @@ const appRoutes: Routes = [
     MatListModule,
     HttpClientModule,
     MatButtonModule,
-    MatCardModule
+    MatCardModule,
+    MatInputModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

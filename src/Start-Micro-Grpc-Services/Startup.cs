@@ -1,16 +1,23 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using System;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Start_Micro_Grpc_Services.Infrastructure;
 using Start_Micro_Grpc_Services.Services;
 
 namespace Start_Micro_Grpc_Services
 {
     public class Startup
     {
-        // This method gets called by the runtime. Use this method to add services to the container.
-        // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
+        public IConfiguration Configuration { get; }
+        public Startup(IConfiguration configuration)
+        {
+            Configuration = configuration;
+        }
+
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddGrpc();
@@ -20,9 +27,12 @@ namespace Start_Micro_Grpc_Services
                        .AllowAnyMethod()
                        .AllowAnyHeader();
             }));
+            services.AddOptions();
+            services.Configure<AppSettings>(Configuration);
+            services.AddHttpClient(HttpClients.StartMicroApi)
+                   .SetHandlerLifetime(TimeSpan.FromMinutes(5));
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             app.UseCors("CorsPolicy");

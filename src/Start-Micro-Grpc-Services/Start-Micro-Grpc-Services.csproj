@@ -8,16 +8,11 @@
   
   <ItemGroup>
     <PackageReference Include="Grpc.AspNetCore" Version="2.24.0" />
+     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.1.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Protos\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Protobuf Include="..\Protos\weather.proto"  GrpcServices="Server">
-      <Link>Protos\weather.proto</Link>
-    </Protobuf>
+    <Protobuf Include="Protos\weather.proto" GrpcServices="Server" />
   </ItemGroup>
 
 </Project>

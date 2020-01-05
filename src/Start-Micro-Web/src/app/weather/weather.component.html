@@ -1,11 +1,20 @@
 <mat-toolbar color="primary">
-    <span>Weather Forecast</span>
+    <mat-form-field>
+        <input matInput placeholder="City Name" [(ngModel)]="cityName" #searchText (keyup)="onKeyUp(searchText.value)">
+    </mat-form-field>
 </mat-toolbar>
-<mat-card *ngFor="let item of forecats">
-    <mat-card-title>
-        {{item.getCityname()}}
-    </mat-card-title>
-    <mat-card-content>
-        {{item.getTemp()}}
-    </mat-card-content>
-</mat-card>
+<article class="widget" *ngIf="forecat">
+    <div class="weatherIcon">
+        <img [src]="forecat.getIcon()" alt="">
+    </div>
+    <div class="weatherInfo">
+        <div class="temperature"><span>{{forecat.getTemp() | number:'1.0-0'}}&deg;</span></div>
+        <div class="description">
+            <div class="weatherCondition">{{forecat.getDesc()}}</div>
+            <div class="city">{{forecat.getCity()}}, {{forecat.getCountrycode()}}</div>
+        </div>
+    </div>
+    <div class="wind">
+        <i class="wi wi-strong-wind"> {{forecat.getWind() | number:'1.0-0'}} km/h</i>
+    </div>
+</article>

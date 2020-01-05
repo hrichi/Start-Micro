@@ -282,3 +282,7 @@ Dockerfile
 
 # .env file contains default environment variables for docker
 .env
+
+# bin & obj folders
+**/bin/*
+**/obj/*
