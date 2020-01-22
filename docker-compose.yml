@@ -14,6 +14,13 @@ services:
         image: start_micro/weather_service
         ports:
             - "8082:3000"
+    weather_prediction_service:
+        build:
+            context: ./src/Start-Micro-Weather-Prediction-Service/
+            dockerfile: dockerfile
+        image: start_micro/weather_prediction_service
+        ports:
+            - "8083:80"
     angular_client:
         build:
             context: ./src/Start-Micro-Web/
