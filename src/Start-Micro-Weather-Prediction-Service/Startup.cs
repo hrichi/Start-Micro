@@ -27,6 +27,7 @@ namespace Start_Micro_Weather_Prediction_Service
         {
             services.AddControllers();
             services.AddSingleton<IPredictionService, PredictionService>();
+            services.AddCors();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -38,8 +39,9 @@ namespace Start_Micro_Weather_Prediction_Service
             }
 
             app.UseRouting();
-
-            app.UseAuthorization();
+            app.UseCors(
+                options => options.SetIsOriginAllowed(x => _ = true).AllowAnyMethod().AllowAnyHeader().AllowCredentials()
+            );
 
             app.UseEndpoints(endpoints =>
             {

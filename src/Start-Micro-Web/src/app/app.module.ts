@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { WeatherComponent } from './weather/weather.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
@@ -16,18 +15,22 @@ import {
   MatButtonModule,
   MatInputModule
 } from '@angular/material';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { Routes, RouterModule } from '@angular/router';
+import { WeatherPredictionComponent } from './weather-prediction/weather-prediction.component';
+import { WeatherComponent } from './weather/weather.component';
 
 const appRoutes: Routes = [
-  { path: 'weather', component: WeatherComponent }
+  { path: 'weather', component: WeatherComponent },
+  { path: 'weather-prediction', component: WeatherPredictionComponent }
 ];
 
 @NgModule({
   declarations: [
     AppComponent,
-    WeatherComponent
+    WeatherComponent,
+    WeatherPredictionComponent
   ],
   imports: [
     RouterModule.forRoot(
@@ -49,7 +52,8 @@ const appRoutes: Routes = [
     MatButtonModule,
     MatCardModule,
     MatInputModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

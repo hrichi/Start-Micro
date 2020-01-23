@@ -1,0 +1,13 @@
+<mat-toolbar color="primary">
+    <form [formGroup]="uploadForm" >
+        <input type="file" id="userFile" (change)="onSelectFile($event)">
+      </form>
+</mat-toolbar>
+<mat-card class="weather-card" *ngIf="file">
+  <mat-card-content layout="row" layout-align="center center">
+    <h2 style="text-align: center;">
+      {{weather}}
+    </h2>
+  <img mat-card-image [src]="imageSrc">
+  </mat-card-content>
+</mat-card>
